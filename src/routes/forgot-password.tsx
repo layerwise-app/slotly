@@ -1,41 +1,42 @@
-import { useState } from 'react';
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { useMutation } from '@tanstack/react-query';
-import { authClient } from '~/lib/auth-client';
-import { Button } from '~/components/ui/button';
+import { useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMutation } from "@tanstack/react-query";
+import { authClient } from "~/lib/auth-client";
+import { Button } from "~/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
-  CardTitle
-} from '~/components/ui/card';
-import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
+  CardTitle,
+} from "~/components/ui/card";
+import { Input } from "~/components/ui/input";
+import { Label } from "~/components/ui/label";
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSlot
-} from '~/components/ui/input-otp';
+  InputOTPSlot,
+} from "~/components/ui/input-otp";
+import { AuthFrame } from "~/components/slotly/auth-frame";
 
-export const Route = createFileRoute('/forgot-password')({
-  component: ForgotPasswordPage
+export const Route = createFileRoute("/forgot-password")({
+  component: ForgotPasswordPage,
 });
 
 function ForgotPasswordPage() {
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const passwordsMatch = password === confirmPassword;
 
   const requestReset = useMutation({
     mutationFn: async () => {
       const { error } = await authClient.emailOtp.requestPasswordReset({
-        email
+        email,
       });
-      if (error) throw new Error(error.message ?? 'Failed to send reset code');
-    }
+      if (error) throw new Error(error.message ?? "Failed to send reset code");
+    },
   });
 
   const resetPassword = useMutation({
@@ -43,16 +44,16 @@ function ForgotPasswordPage() {
       const { error } = await authClient.emailOtp.resetPassword({
         email,
         otp,
-        password
+        password,
       });
-      if (error) throw new Error(error.message ?? 'Failed to reset password');
-    }
+      if (error) throw new Error(error.message ?? "Failed to reset password");
+    },
   });
 
   if (resetPassword.isSuccess) {
     return (
-      <div className='flex min-h-svh items-center justify-center p-4'>
-        <Card className='w-full max-w-sm'>
+      <AuthFrame>
+        <Card className="auth-card">
           <CardHeader>
             <CardTitle>Password reset</CardTitle>
             <CardDescription>
@@ -60,75 +61,75 @@ function ForgotPasswordPage() {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Button asChild className='w-full'>
-              <Link to='/sign-in'>Back to sign in</Link>
+            <Button asChild className="w-full">
+              <Link to="/sign-in">Back to sign in</Link>
             </Button>
           </CardContent>
         </Card>
-      </div>
+      </AuthFrame>
     );
   }
 
   return (
-    <div className='flex min-h-svh items-center justify-center p-4'>
-      <Card className='w-full max-w-sm'>
+    <AuthFrame>
+      <Card className="auth-card">
         <CardHeader>
           <CardTitle>Reset your password</CardTitle>
           <CardDescription>
             We’ll send a six-digit reset code to your email.
           </CardDescription>
         </CardHeader>
-        <CardContent className='flex flex-col gap-4'>
+        <CardContent className="flex flex-col gap-4">
           <form
-            className='flex flex-col gap-4'
+            className="flex flex-col gap-4"
             onSubmit={(event) => {
               event.preventDefault();
-              setOtp('');
+              setOtp("");
               resetPassword.reset();
               requestReset.mutate();
             }}
           >
-            <div className='flex flex-col gap-2'>
-              <Label htmlFor='email'>Email</Label>
-              <div className='flex gap-2'>
+            <div className="flex flex-col gap-2">
+              <Label htmlFor="email">Email</Label>
+              <div className="flex gap-2">
                 <Input
-                  id='email'
-                  type='email'
-                  autoComplete='email'
+                  id="email"
+                  type="email"
+                  autoComplete="email"
                   required
                   value={email}
                   onChange={(event) => {
                     setEmail(event.target.value);
-                    setOtp('');
+                    setOtp("");
                     requestReset.reset();
                     resetPassword.reset();
                   }}
                 />
-                <Button type='submit' disabled={requestReset.isPending}>
+                <Button type="submit" disabled={requestReset.isPending}>
                   {requestReset.isPending
-                    ? 'Sending…'
+                    ? "Sending…"
                     : requestReset.isSuccess
-                      ? 'Resend code'
-                      : 'Send code'}
+                      ? "Resend code"
+                      : "Send code"}
                 </Button>
               </div>
             </div>
             {requestReset.error ? (
-              <p className='text-sm text-destructive'>
+              <p className="text-sm text-destructive">
                 {requestReset.error.message}
               </p>
             ) : null}
           </form>
           {requestReset.isSuccess ? (
             <form
-              className='flex flex-col gap-4'
+              className="flex flex-col gap-4"
               onSubmit={(event) => {
                 event.preventDefault();
                 if (!passwordsMatch) return;
                 resetPassword.mutate();
               }}
             >
-              <p className='text-sm text-muted-foreground'>
+              <p className="text-sm text-muted-foreground">
                 Enter the code sent to {email} and choose a new password.
               </p>
               <InputOTP
@@ -145,12 +146,12 @@ function ForgotPasswordPage() {
                   ))}
                 </InputOTPGroup>
               </InputOTP>
-              <div className='flex flex-col gap-2'>
-                <Label htmlFor='password'>New password</Label>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="password">New password</Label>
                 <Input
-                  id='password'
-                  type='password'
-                  autoComplete='new-password'
+                  id="password"
+                  type="password"
+                  autoComplete="new-password"
                   minLength={8}
                   required
                   value={password}
@@ -160,12 +161,12 @@ function ForgotPasswordPage() {
                   }}
                 />
               </div>
-              <div className='flex flex-col gap-2'>
-                <Label htmlFor='confirm-password'>Confirm new password</Label>
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="confirm-password">Confirm new password</Label>
                 <Input
-                  id='confirm-password'
-                  type='password'
-                  autoComplete='new-password'
+                  id="confirm-password"
+                  type="password"
+                  autoComplete="new-password"
                   minLength={8}
                   required
                   aria-invalid={confirmPassword ? !passwordsMatch : undefined}
@@ -176,31 +177,31 @@ function ForgotPasswordPage() {
                   }}
                 />
                 {confirmPassword && !passwordsMatch ? (
-                  <p className='text-sm text-destructive'>
+                  <p className="text-sm text-destructive">
                     Passwords do not match.
                   </p>
                 ) : null}
               </div>
               {resetPassword.error ? (
-                <p className='text-sm text-destructive'>
+                <p className="text-sm text-destructive">
                   {resetPassword.error.message}
                 </p>
               ) : null}
               <Button
-                type='submit'
+                type="submit"
                 disabled={
                   otp.length < 6 || !passwordsMatch || resetPassword.isPending
                 }
               >
-                {resetPassword.isPending ? 'Resetting…' : 'Reset password'}
+                {resetPassword.isPending ? "Resetting…" : "Reset password"}
               </Button>
             </form>
           ) : null}
-          <Button variant='link' asChild className='h-auto p-0'>
-            <Link to='/sign-in'>Back to sign in</Link>
+          <Button variant="link" asChild className="h-auto p-0">
+            <Link to="/sign-in">Back to sign in</Link>
           </Button>
         </CardContent>
       </Card>
-    </div>
+    </AuthFrame>
   );
 }

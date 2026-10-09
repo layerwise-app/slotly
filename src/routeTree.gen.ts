@@ -8,191 +8,346 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as SignUpRouteImport } from './routes/sign-up';
-import { Route as SignInRouteImport } from './routes/sign-in';
-import { Route as ForgotPasswordRouteImport } from './routes/forgot-password';
-import { Route as DashboardRouteImport } from './routes/dashboard';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as SignInOtpRouteImport } from './routes/sign-in_.otp';
-import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as DemoRouteImport } from './routes/demo'
+import { Route as ForgotPasswordRouteImport } from './routes/forgot-password'
+import { Route as SignInRouteImport } from './routes/sign-in'
+import { Route as SignUpRouteImport } from './routes/sign-up'
+import { Route as BookingTokenRouteImport } from './routes/booking.$token'
+import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
+import { Route as DashboardAvailabilityRouteImport } from './routes/dashboard.availability'
+import { Route as DashboardBookingsRouteImport } from './routes/dashboard.bookings'
+import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
+import { Route as SignInOtpRouteImport } from './routes/sign-in_.otp'
+import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as BookHandleSlugRouteImport } from './routes/book.$handle.$slug'
 
-const SignUpRoute = SignUpRouteImport.update({
-  id: '/sign-up',
-  path: '/sign-up',
-  getParentRoute: () => rootRouteImport
-} as any);
-const SignInRoute = SignInRouteImport.update({
-  id: '/sign-in',
-  path: '/sign-in',
-  getParentRoute: () => rootRouteImport
-} as any);
-const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
-  id: '/forgot-password',
-  path: '/forgot-password',
-  getParentRoute: () => rootRouteImport
-} as any);
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => rootRouteImport
-} as any);
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport
-} as any);
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DemoRoute = DemoRouteImport.update({
+  id: '/demo',
+  path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ForgotPasswordRoute = ForgotPasswordRouteImport.update({
+  id: '/forgot-password',
+  path: '/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignInRoute = SignInRouteImport.update({
+  id: '/sign-in',
+  path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SignUpRoute = SignUpRouteImport.update({
+  id: '/sign-up',
+  path: '/sign-up',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingTokenRoute = BookingTokenRouteImport.update({
+  id: '/booking/$token',
+  path: '/booking/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardIndexRoute = DashboardIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAvailabilityRoute = DashboardAvailabilityRouteImport.update({
+  id: '/availability',
+  path: '/availability',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardBookingsRoute = DashboardBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const SignInOtpRoute = SignInOtpRouteImport.update({
   id: '/sign-in_/otp',
   path: '/sign-in/otp',
-  getParentRoute: () => rootRouteImport
-} as any);
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
-  getParentRoute: () => rootRouteImport
-} as any);
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookHandleSlugRoute = BookHandleSlugRouteImport.update({
+  id: '/book/$handle/$slug',
+  path: '/book/$handle/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/dashboard': typeof DashboardRoute;
-  '/forgot-password': typeof ForgotPasswordRoute;
-  '/sign-in': typeof SignInRoute;
-  '/sign-up': typeof SignUpRoute;
-  '/sign-in/otp': typeof SignInOtpRoute;
-  '/api/auth/$': typeof ApiAuthSplatRoute;
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/demo': typeof DemoRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/booking/$token': typeof BookingTokenRoute
+  '/dashboard/availability': typeof DashboardAvailabilityRoute
+  '/dashboard/bookings': typeof DashboardBookingsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/sign-in/otp': typeof SignInOtpRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/book/$handle/$slug': typeof BookHandleSlugRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/dashboard': typeof DashboardRoute;
-  '/forgot-password': typeof ForgotPasswordRoute;
-  '/sign-in': typeof SignInRoute;
-  '/sign-up': typeof SignUpRoute;
-  '/sign-in/otp': typeof SignInOtpRoute;
-  '/api/auth/$': typeof ApiAuthSplatRoute;
+  '/': typeof IndexRoute
+  '/demo': typeof DemoRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/booking/$token': typeof BookingTokenRoute
+  '/dashboard/availability': typeof DashboardAvailabilityRoute
+  '/dashboard/bookings': typeof DashboardBookingsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/sign-in/otp': typeof SignInOtpRoute
+  '/dashboard': typeof DashboardIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/book/$handle/$slug': typeof BookHandleSlugRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  '/': typeof IndexRoute;
-  '/dashboard': typeof DashboardRoute;
-  '/forgot-password': typeof ForgotPasswordRoute;
-  '/sign-in': typeof SignInRoute;
-  '/sign-up': typeof SignUpRoute;
-  '/sign-in_/otp': typeof SignInOtpRoute;
-  '/api/auth/$': typeof ApiAuthSplatRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
+  '/demo': typeof DemoRoute
+  '/forgot-password': typeof ForgotPasswordRoute
+  '/sign-in': typeof SignInRoute
+  '/sign-up': typeof SignUpRoute
+  '/booking/$token': typeof BookingTokenRoute
+  '/dashboard/availability': typeof DashboardAvailabilityRoute
+  '/dashboard/bookings': typeof DashboardBookingsRoute
+  '/dashboard/settings': typeof DashboardSettingsRoute
+  '/sign-in_/otp': typeof SignInOtpRoute
+  '/dashboard/': typeof DashboardIndexRoute
+  '/api/auth/$': typeof ApiAuthSplatRoute
+  '/book/$handle/$slug': typeof BookHandleSlugRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/demo'
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
+    | '/booking/$token'
+    | '/dashboard/availability'
+    | '/dashboard/bookings'
+    | '/dashboard/settings'
     | '/sign-in/otp'
-    | '/api/auth/$';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/dashboard/'
+    | '/api/auth/$'
+    | '/book/$handle/$slug'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/dashboard'
+    | '/demo'
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
+    | '/booking/$token'
+    | '/dashboard/availability'
+    | '/dashboard/bookings'
+    | '/dashboard/settings'
     | '/sign-in/otp'
-    | '/api/auth/$';
+    | '/dashboard'
+    | '/api/auth/$'
+    | '/book/$handle/$slug'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/demo'
     | '/forgot-password'
     | '/sign-in'
     | '/sign-up'
+    | '/booking/$token'
+    | '/dashboard/availability'
+    | '/dashboard/bookings'
+    | '/dashboard/settings'
     | '/sign-in_/otp'
-    | '/api/auth/$';
-  fileRoutesById: FileRoutesById;
+    | '/dashboard/'
+    | '/api/auth/$'
+    | '/book/$handle/$slug'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  DashboardRoute: typeof DashboardRoute;
-  ForgotPasswordRoute: typeof ForgotPasswordRoute;
-  SignInRoute: typeof SignInRoute;
-  SignUpRoute: typeof SignUpRoute;
-  SignInOtpRoute: typeof SignInOtpRoute;
-  ApiAuthSplatRoute: typeof ApiAuthSplatRoute;
+  IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
+  DemoRoute: typeof DemoRoute
+  ForgotPasswordRoute: typeof ForgotPasswordRoute
+  SignInRoute: typeof SignInRoute
+  SignUpRoute: typeof SignUpRoute
+  BookingTokenRoute: typeof BookingTokenRoute
+  SignInOtpRoute: typeof SignInOtpRoute
+  ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  BookHandleSlugRoute: typeof BookHandleSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/sign-up': {
-      id: '/sign-up';
-      path: '/sign-up';
-      fullPath: '/sign-up';
-      preLoaderRoute: typeof SignUpRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    '/sign-in': {
-      id: '/sign-in';
-      path: '/sign-in';
-      fullPath: '/sign-in';
-      preLoaderRoute: typeof SignInRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    '/forgot-password': {
-      id: '/forgot-password';
-      path: '/forgot-password';
-      fullPath: '/forgot-password';
-      preLoaderRoute: typeof ForgotPasswordRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    '/dashboard': {
-      id: '/dashboard';
-      path: '/dashboard';
-      fullPath: '/dashboard';
-      preLoaderRoute: typeof DashboardRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/demo': {
+      id: '/demo'
+      path: '/demo'
+      fullPath: '/demo'
+      preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forgot-password': {
+      id: '/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof ForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-in': {
+      id: '/sign-in'
+      path: '/sign-in'
+      fullPath: '/sign-in'
+      preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sign-up': {
+      id: '/sign-up'
+      path: '/sign-up'
+      fullPath: '/sign-up'
+      preLoaderRoute: typeof SignUpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/$token': {
+      id: '/booking/$token'
+      path: '/booking/$token'
+      fullPath: '/booking/$token'
+      preLoaderRoute: typeof BookingTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/availability': {
+      id: '/dashboard/availability'
+      path: '/availability'
+      fullPath: '/dashboard/availability'
+      preLoaderRoute: typeof DashboardAvailabilityRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/bookings': {
+      id: '/dashboard/bookings'
+      path: '/bookings'
+      fullPath: '/dashboard/bookings'
+      preLoaderRoute: typeof DashboardBookingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/settings': {
+      id: '/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof DashboardSettingsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/sign-in_/otp': {
-      id: '/sign-in_/otp';
-      path: '/sign-in/otp';
-      fullPath: '/sign-in/otp';
-      preLoaderRoute: typeof SignInOtpRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/sign-in_/otp'
+      path: '/sign-in/otp'
+      fullPath: '/sign-in/otp'
+      preLoaderRoute: typeof SignInOtpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
-      id: '/api/auth/$';
-      path: '/api/auth/$';
-      fullPath: '/api/auth/$';
-      preLoaderRoute: typeof ApiAuthSplatRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/api/auth/$'
+      path: '/api/auth/$'
+      fullPath: '/api/auth/$'
+      preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/$handle/$slug': {
+      id: '/book/$handle/$slug'
+      path: '/book/$handle/$slug'
+      fullPath: '/book/$handle/$slug'
+      preLoaderRoute: typeof BookHandleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface DashboardRouteChildren {
+  DashboardAvailabilityRoute: typeof DashboardAvailabilityRoute
+  DashboardBookingsRoute: typeof DashboardBookingsRoute
+  DashboardSettingsRoute: typeof DashboardSettingsRoute
+  DashboardIndexRoute: typeof DashboardIndexRoute
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAvailabilityRoute: DashboardAvailabilityRoute,
+  DashboardBookingsRoute: DashboardBookingsRoute,
+  DashboardSettingsRoute: DashboardSettingsRoute,
+  DashboardIndexRoute: DashboardIndexRoute,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DashboardRoute: DashboardRoute,
+  DashboardRoute: DashboardRouteWithChildren,
+  DemoRoute: DemoRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
+  BookingTokenRoute: BookingTokenRoute,
   SignInOtpRoute: SignInOtpRoute,
-  ApiAuthSplatRoute: ApiAuthSplatRoute
-};
+  ApiAuthSplatRoute: ApiAuthSplatRoute,
+  BookHandleSlugRoute: BookHandleSlugRoute,
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
 
-import type { getRouter } from './router.tsx';
-import type { createStart } from '@tanstack/react-start';
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
 declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true;
-    router: Awaited<ReturnType<typeof getRouter>>;
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
   }
 }
