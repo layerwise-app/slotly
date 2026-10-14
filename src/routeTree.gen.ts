@@ -19,6 +19,7 @@ import { Route as BookingTokenRouteImport } from './routes/booking.$token'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard.index'
 import { Route as DashboardAvailabilityRouteImport } from './routes/dashboard.availability'
 import { Route as DashboardBookingsRouteImport } from './routes/dashboard.bookings'
+import { Route as DashboardEventsRouteImport } from './routes/dashboard.events'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as SignInOtpRouteImport } from './routes/sign-in_.otp'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
@@ -74,6 +75,11 @@ const DashboardBookingsRoute = DashboardBookingsRouteImport.update({
   path: '/bookings',
   getParentRoute: () => DashboardRoute,
 } as any)
+const DashboardEventsRoute = DashboardEventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardSettingsRoute = DashboardSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
@@ -105,6 +111,7 @@ export interface FileRoutesByFullPath {
   '/booking/$token': typeof BookingTokenRoute
   '/dashboard/availability': typeof DashboardAvailabilityRoute
   '/dashboard/bookings': typeof DashboardBookingsRoute
+  '/dashboard/events': typeof DashboardEventsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/sign-in/otp': typeof SignInOtpRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/booking/$token': typeof BookingTokenRoute
   '/dashboard/availability': typeof DashboardAvailabilityRoute
   '/dashboard/bookings': typeof DashboardBookingsRoute
+  '/dashboard/events': typeof DashboardEventsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/sign-in/otp': typeof SignInOtpRoute
   '/dashboard': typeof DashboardIndexRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/booking/$token': typeof BookingTokenRoute
   '/dashboard/availability': typeof DashboardAvailabilityRoute
   '/dashboard/bookings': typeof DashboardBookingsRoute
+  '/dashboard/events': typeof DashboardEventsRoute
   '/dashboard/settings': typeof DashboardSettingsRoute
   '/sign-in_/otp': typeof SignInOtpRoute
   '/dashboard/': typeof DashboardIndexRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/booking/$token'
     | '/dashboard/availability'
     | '/dashboard/bookings'
+    | '/dashboard/events'
     | '/dashboard/settings'
     | '/sign-in/otp'
     | '/dashboard/'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/booking/$token'
     | '/dashboard/availability'
     | '/dashboard/bookings'
+    | '/dashboard/events'
     | '/dashboard/settings'
     | '/sign-in/otp'
     | '/dashboard'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/booking/$token'
     | '/dashboard/availability'
     | '/dashboard/bookings'
+    | '/dashboard/events'
     | '/dashboard/settings'
     | '/sign-in_/otp'
     | '/dashboard/'
@@ -278,6 +290,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardBookingsRouteImport
       parentRoute: typeof DashboardRoute
     }
+    '/dashboard/events': {
+      id: '/dashboard/events'
+      path: '/events'
+      fullPath: '/dashboard/events'
+      preLoaderRoute: typeof DashboardEventsRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/settings': {
       id: '/dashboard/settings'
       path: '/settings'
@@ -312,6 +331,7 @@ declare module '@tanstack/react-router' {
 interface DashboardRouteChildren {
   DashboardAvailabilityRoute: typeof DashboardAvailabilityRoute
   DashboardBookingsRoute: typeof DashboardBookingsRoute
+  DashboardEventsRoute: typeof DashboardEventsRoute
   DashboardSettingsRoute: typeof DashboardSettingsRoute
   DashboardIndexRoute: typeof DashboardIndexRoute
 }
@@ -319,6 +339,7 @@ interface DashboardRouteChildren {
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAvailabilityRoute: DashboardAvailabilityRoute,
   DashboardBookingsRoute: DashboardBookingsRoute,
+  DashboardEventsRoute: DashboardEventsRoute,
   DashboardSettingsRoute: DashboardSettingsRoute,
   DashboardIndexRoute: DashboardIndexRoute,
 }

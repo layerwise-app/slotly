@@ -1,1030 +1,234 @@
-.slotly-landing {
-  background: #fcfdf9;
-  color: #353c30;
-  overflow: hidden;
-}
-.landing-header {
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 29px 40px;
-  display: flex;
-  align-items: center;
-  gap: 35px;
-}
-.landing-nav {
-  display: flex;
-  gap: 29px;
-  align-items: center;
-  margin-left: auto;
-}
-.landing-nav a,
-.landing-sign-in {
-  font-size: 12px;
-  color: #7d8773;
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-}
-.landing-nav a:hover,
-.landing-sign-in:hover {
-  color: #39744f;
-}
-.landing-auth {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-.landing-nav-cta {
-  font-size: 11px;
-  padding: 9px 13px;
-}
-.landing-hero {
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 80px 60px 88px;
-  display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 52px;
-  align-items: center;
-}
-.landing-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 9px;
-  font-weight: 450;
-  letter-spacing: 1.45px;
-  color: #8b9a7b;
-}
-.landing-eyebrow .status-dot {
-  width: 5px;
-  height: 5px;
-}
-.landing-hero h1 {
-  font-size: clamp(45px, 4.7vw, 65px);
-  line-height: 1.09;
-  font-weight: 500;
-  letter-spacing: -2.7px;
-  margin: 21px 0 26px;
-}
-.landing-hero h1 > span {
-  color: #608a52;
-}
-.landing-hero-copy > p {
-  font-size: 15px;
-  line-height: 1.85;
-  color: #6f7b63;
-}
-.landing-hero-actions {
-  display: flex;
-  gap: 27px;
-  align-items: center;
-  margin-top: 30px;
-}
-.landing-hero-actions > .primary-button {
-  padding: 12px 19px;
-  font-size: 12px;
-  gap: 12px;
-}
-.landing-demo-button {
-  font-size: 12px;
-  color: #7b8b69;
-  display: inline-flex;
-  gap: 9px;
-  align-items: center;
-}
-.landing-demo-button > span {
-  border: 1px solid #dce5d1;
-  border-radius: 50%;
-  background: #f5f8ef;
-  width: 27px;
-  height: 27px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #96a980;
-}
-.landing-hero-note {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 22px;
-  font-size: 9px;
-  color: #a0ac91;
-}
-.landing-hero-visual {
-  position: relative;
-  padding: 10px 10px 40px 12px;
-}
-.landing-orbit {
-  position: absolute;
-  border-radius: 50%;
-  z-index: 0;
-  pointer-events: none;
-}
-.orbit-one {
-  width: 450px;
-  height: 450px;
-  left: -15px;
-  top: -15px;
-  background: radial-gradient(circle, #eef3e3 0, #f3f6eb 55%, transparent 71%);
-}
-.orbit-two {
-  width: 480px;
-  height: 480px;
-  left: -32px;
-  top: -31px;
-  border: 1px dashed #e4ead9;
-}
-.landing-booking-card {
-  position: relative;
-  z-index: 1;
-  background: #fff;
-  border-radius: 12px;
-  border: 1px solid #dfe7d3;
-  box-shadow:
-    0 10px 45px #7081540c,
-    9px 9px 0 -1px #eef3e4;
-  transform: rotate(-2.5deg);
-  overflow: hidden;
-  animation: card-arrive 650ms 120ms ease both;
-}
-.landing-booking-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 17px;
-  border-bottom: 1px solid #edf0e5;
-  background: #fafcf7;
-  color: #adbaa0;
-}
-.landing-booking-bar > span:first-child {
-  display: flex;
-  gap: 4px;
-}
-.landing-booking-bar > span:first-child > span {
-  width: 5px;
-  height: 5px;
-  background: #dfe7d4;
-  border-radius: 50%;
-}
-.landing-booking-bar > span:nth-child(2) {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  font-size: 8px;
-}
-.landing-booking-preview {
-  padding: 25px 29px 20px;
-}
-.landing-preview-host {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.landing-preview-avatar {
-  display: flex;
-  width: 37px;
-  height: 37px;
-  align-items: center;
-  justify-content: center;
-  background: #eaf0df;
-  border-radius: 50%;
-  color: #8ba271;
-  font-size: 12px;
-  flex-shrink: 0;
-}
-.landing-preview-host > div > span {
-  display: block;
-  font-size: 7px;
-  color: #a2b08f;
-  letter-spacing: 0.9px;
-  margin: 1px 0 5px;
-}
-.landing-preview-host h3 {
-  font-size: 22px;
-  letter-spacing: -0.6px;
-  color: #637a4e;
-  font-weight: 500;
-  line-height: 1.2;
-}
-.landing-preview-host p {
-  margin-top: 6px;
-  font-size: 10px;
-  color: #a3b092;
-  line-height: 1.7;
-  max-width: 260px;
-}
-.landing-preview-meta {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  font-size: 8px;
-  color: #98aa81;
-  margin: 17px 0 23px;
-}
-.landing-preview-meta > span {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.landing-preview-month {
-  display: flex;
-  justify-content: space-between;
-  color: #829b66;
-  font-size: 12px;
-  font-weight: 450;
-  margin-bottom: 15px;
-}
-.landing-preview-month > span {
-  display: flex;
-  gap: 8px;
-  color: #becbb0;
-  font-size: 13px;
-}
-.landing-preview-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 7px 6px;
-  text-align: center;
-}
-.landing-preview-days > span {
-  color: #8fa577;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 28px;
-  border-radius: 5px;
-  background: #f5f8ef;
-}
-.landing-preview-days > span:empty {
-  background: transparent;
-}
-.landing-preview-days > span.landing-preview-weekday {
-  font-size: 7px;
-  color: #afbea0;
-  background: transparent;
-  height: 19px;
-}
-.landing-preview-days > span.chosen {
-  color: #fff;
-  background: #78965d;
-  box-shadow: 0 2px 4px #4e6b2c0c;
-}
-.landing-preview-times {
-  display: flex;
-  gap: 8px;
-  margin-top: 17px;
-}
-.landing-preview-times > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  flex: 1;
-  border: 1px solid #e1e9d6;
-  border-radius: 5px;
-  padding: 8px 0;
-  color: #a2b48b;
-  font-size: 9px;
-}
-.landing-preview-times > span.chosen {
-  border-color: #9eb886;
-  color: #87a06b;
-  background: #f1f7e9;
-}
-.landing-preview-footer {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 13px 21px;
-  background: #fafcf7;
-  border-top: 1px solid #edf0e5;
-  font-size: 6px;
-  letter-spacing: 0.6px;
-  color: #a6b397;
-}
-.landing-preview-footer > a {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  margin-left: auto;
-  font-size: 8px;
-  color: #86a267;
-  letter-spacing: 0;
-}
-.landing-confirmation-tag {
-  position: absolute;
-  z-index: 2;
-  right: -19px;
-  bottom: 0;
-  background: #fdfefb;
-  border: 1px solid #dce7ce;
-  border-radius: 9px;
-  padding: 14px 17px;
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  box-shadow: 0 8px 20px #779b4608;
-  transform: rotate(3deg);
-  animation: card-arrive 650ms 250ms ease both;
-}
-.landing-confirmation-tag > span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 33px;
-  height: 33px;
-  border-radius: 50%;
-  background: #eaf3df;
-  color: #7fa358;
-  border: 4px solid #f5faed;
-}
-.landing-confirmation-tag strong {
-  display: block;
-  font-size: 12px;
-  color: #6d8d51;
-  font-weight: 450;
-}
-.landing-confirmation-tag small {
-  display: block;
-  color: #acbc9a;
-  font-size: 8px;
-  margin-top: 4px;
-}
-.landing-visual-caption {
-  display: block;
-  font-size: 8px;
-  color: #a6b897;
-  transform: rotate(-2deg);
-  position: absolute;
-  left: 12px;
-  bottom: -15px;
-}
-.landing-visual-spark {
-  position: absolute;
-  color: #b7c6a3;
-  font-size: 26px;
-  font-weight: 200;
-  z-index: 2;
-}
-.spark-one {
-  left: -21px;
-  top: 54px;
-  transform: rotate(13deg);
-}
-.spark-two {
-  right: -22px;
-  top: 20px;
-  font-size: 20px;
-}
-.landing-principles {
-  max-width: 1140px;
-  margin: 8px auto 0;
-  display: flex;
-  justify-content: center;
-  gap: 73px;
-  padding: 26px 20px;
-  border-top: 1px solid #e9eddf;
-  border-bottom: 1px solid #e9eddf;
-}
-.landing-principles > span {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: #8f9e7e;
-  font-size: 11px;
-}
-.landing-principles svg {
-  color: #a5b595;
-  stroke-width: 1.5;
-}
-.landing-features {
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 90px 60px 60px;
-  scroll-margin-top: 30px;
-}
-.landing-section-heading {
-  text-align: center;
-}
-.landing-section-heading h2 {
-  font-size: 33px;
-  font-weight: 450;
-  letter-spacing: -1px;
-  margin: 13px 0 12px;
-  color: #536a41;
-  line-height: 1.3;
-}
-.landing-section-heading > p {
-  color: #9daa8e;
-  font-size: 13px;
-}
-.landing-feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 38px;
-}
-.landing-feature {
-  border: 1px solid #e5eada;
-  border-radius: 10px;
-  background: #fffefb;
-  padding: 28px 26px;
-}
-.landing-feature-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--event-pale);
-  border: 1px solid color-mix(in srgb, var(--event-color) 12%, transparent);
-  width: 45px;
-  height: 45px;
-  border-radius: 11px;
-  color: var(--event-color);
-  margin-bottom: 27px;
-}
-.landing-feature-icon svg {
-  stroke-width: 1.5;
-}
-.landing-feature-label {
-  font-size: 7px;
-  letter-spacing: 1.1px;
-  color: #a3b394;
-}
-.landing-feature h3 {
-  font-size: 18px;
-  font-weight: 450;
-  letter-spacing: -0.4px;
-  line-height: 1.35;
-  color: #6b8156;
-  margin: 9px 0 12px;
-}
-.landing-feature p {
-  font-size: 12px;
-  color: #6f7b63;
-  line-height: 1.9;
-}
-.landing-how {
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 37px 60px 70px;
-  scroll-margin-top: 40px;
-}
-.landing-how h2 {
-  font-size: 30px;
-}
-.landing-step-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 48px;
-  margin: 45px 30px 0;
-}
-.landing-step-grid > article {
-  position: relative;
-}
-.landing-step-grid > article:not(:last-child)::after {
-  content: "";
-  height: 1px;
-  background: #e3e9d7;
-  position: absolute;
-  top: 18px;
-  left: 50px;
-  right: -20px;
-}
-.landing-step-number {
-  color: #9daf89;
-  background: #f0f5e7;
-  border: 1px solid #e5ecd9;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-  font-size: 11px;
-}
-.landing-step-grid h3 {
-  font-size: 17px;
-  font-weight: 450;
-  letter-spacing: -0.3px;
-  color: #778c62;
-  margin: 18px 0 9px;
-}
-.landing-step-grid p {
-  color: #6f7b63;
-  line-height: 1.85;
-  font-size: 12px;
-  max-width: 265px;
-}
-.landing-final-cta {
-  max-width: 1140px;
-  margin: 0 auto 70px;
-  border: 1px solid #dfe9d1;
-  border-radius: 12px;
-  background:
-    radial-gradient(ellipse at 95% 100%, #e1eccd, transparent 60%), #f0f5e7;
-  padding: 45px 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-}
-.landing-final-cta h2 {
-  font-size: 36px;
-  line-height: 1.2;
-  letter-spacing: -1px;
-  font-weight: 450;
-  color: #607b48;
-  margin: 17px 0 16px;
-}
-.landing-final-cta p {
-  color: #94a682;
-  font-size: 12px;
-  line-height: 1.8;
-}
-.landing-final-cta .primary-button {
-  margin-top: 23px;
-  padding: 11px 17px;
-  font-size: 11px;
-}
-.landing-final-cta .calendar-art {
-  transform: scale(1.35);
-  margin-right: 40px;
-}
-.landing-footer {
-  border-top: 1px solid #e7ecdc;
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 30px 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-.landing-footer .slotly-logo {
-  font-size: 26px;
-}
-.landing-footer .logo-mark {
-  transform: scale(0.85) rotate(-12deg);
-  margin-right: -4px;
-}
-.landing-footer > span {
-  font-size: 10px;
-  color: #a1b091;
-  margin-right: auto;
-  padding-left: 15px;
-}
-.landing-footer > div {
-  display: flex;
-  gap: 26px;
-}
-.landing-footer > div > a {
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
-  color: #8c9f79;
-  font-size: 10px;
-}
-@media (max-width: 1100px) {
-  .landing-header {
-    padding: 25px 35px;
-    gap: 25px;
+/* Landing motion. Static defaults are the resting state shown with reduced motion. */
+
+/* Scroll reveal: hidden only after the reveal hook has started. */
+.reveal-ready [data-reveal]:not([data-visible]) {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.reveal-ready [data-reveal="grow"]:not([data-visible]) {
+  transform: scaleY(0.05);
+}
+[data-reveal] {
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* Hero booking widget: date picked, slots cascade, slot picked, confirmed. */
+.hw {
+  --hw-loop: 9s;
+}
+.hw-day-pick,
+.hw-slot,
+.hw-plain,
+.hw-split,
+.hw-confirm,
+.hw-check,
+.hw-tap {
+  animation-duration: var(--hw-loop);
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+.hw-day-pick {
+  animation-name: hw-day;
+}
+.hw-slot {
+  animation-name: hw-slot;
+  animation-delay: calc(var(--i, 0) * 110ms);
+}
+.hw-plain {
+  opacity: 0;
+  animation-name: hw-plain;
+}
+.hw-split {
+  animation-name: hw-split;
+}
+.hw-confirm {
+  opacity: 0;
+  visibility: hidden;
+  animation-name: hw-confirm;
+}
+.hw-check {
+  animation-name: hw-check;
+}
+.hw-tap {
+  opacity: 0;
+  animation-timing-function: ease-out;
+}
+.hw-tap[data-at="day"] {
+  animation-name: hw-tap-day;
+}
+.hw-tap[data-at="slot"] {
+  animation-name: hw-tap-slot;
+}
+.hw-tap[data-at="next"] {
+  animation-name: hw-tap-next;
+}
+
+@keyframes hw-day {
+  0%,
+  9% {
+    background: var(--accent);
+    color: var(--foreground);
   }
-  .landing-nav {
-    gap: 23px;
+  12%,
+  93% {
+    background: var(--primary);
+    color: var(--primary-foreground);
   }
-  .landing-auth {
-    gap: 20px;
-  }
-  .landing-hero {
-    padding: 70px 45px 90px;
-    gap: 35px;
-  }
-  .landing-hero h1 {
-    font-size: 52px;
-    letter-spacing: -2px;
-  }
-  .landing-hero-copy > p {
-    font-size: 13px;
-  }
-  .orbit-one {
-    width: 370px;
-    height: 370px;
-    left: -20px;
-    top: 20px;
-  }
-  .orbit-two {
-    width: 400px;
-    height: 400px;
-    top: 2px;
-    left: -35px;
-  }
-  .landing-booking-preview {
-    padding: 22px;
-  }
-  .landing-principles {
-    margin-left: 40px;
-    margin-right: 40px;
-    gap: 45px;
-  }
-  .landing-features {
-    padding: 75px 40px 50px;
-  }
-  .landing-how {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-  .landing-final-cta {
-    margin-left: 40px;
-    margin-right: 40px;
-    padding: 40px 45px;
-  }
-  .landing-footer {
-    margin: 0 40px;
+  98%,
+  100% {
+    background: var(--accent);
+    color: var(--foreground);
   }
 }
-@media (max-width: 850px) {
-  .landing-header {
-    padding: 25px 30px;
+@keyframes hw-slot {
+  0%,
+  14% {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  .landing-desktop-link {
-    display: none !important;
+  20%,
+  92% {
+    opacity: 1;
+    transform: none;
   }
-  .landing-hero {
-    grid-template-columns: 1fr 1fr;
-    padding: 60px 32px 80px;
-    gap: 25px;
+  97%,
+  100% {
+    opacity: 0;
   }
-  .landing-hero h1 {
-    font-size: 43px;
-    letter-spacing: -1.8px;
+}
+@keyframes hw-plain {
+  0%,
+  39% {
+    opacity: 1;
   }
-  .landing-eyebrow {
-    font-size: 7px;
-    letter-spacing: 1px;
+  42%,
+  100% {
+    opacity: 0;
   }
-  .landing-hero-copy > p {
-    font-size: 12px;
+}
+@keyframes hw-split {
+  0%,
+  39% {
+    opacity: 0;
+    transform: scale(0.96);
   }
-  .landing-desktop-break {
-    display: none;
+  43%,
+  100% {
+    opacity: 1;
+    transform: none;
   }
-  .landing-hero-actions {
-    gap: 18px;
-    flex-wrap: wrap;
+}
+@keyframes hw-confirm {
+  0%,
+  57% {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.94) translateY(10px);
   }
-  .landing-hero-actions > .primary-button {
-    padding: 10px 13px;
-    font-size: 11px;
+  62%,
+  90% {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
   }
-  .landing-demo-button {
-    font-size: 10px;
-    gap: 6px;
+  95%,
+  100% {
+    opacity: 0;
+    visibility: visible;
+    transform: scale(0.98);
   }
-  .landing-hero-note {
-    font-size: 8px;
-    max-width: 230px;
-    line-height: 1.7;
+}
+@keyframes hw-check {
+  0%,
+  60% {
+    transform: scale(0);
   }
-  .landing-booking-preview {
-    padding: 19px;
+  66% {
+    transform: scale(1.18);
   }
-  .landing-preview-days {
-    gap: 6px 4px;
-  }
-  .landing-preview-days > span {
-    height: 25px;
-  }
-  .landing-preview-host h3 {
-    font-size: 21px;
-  }
-  .landing-confirmation-tag {
-    padding: 11px 12px;
-    right: -4px;
-  }
-  .landing-confirmation-tag strong {
-    font-size: 10px;
-  }
-  .landing-principles {
-    margin: 0 32px;
-    gap: 26px;
-  }
-  .landing-principles > span {
-    font-size: 9px;
-    gap: 5px;
-  }
-  .landing-principles > span svg {
-    width: 14px;
-  }
-  .landing-section-heading h2 {
-    font-size: 29px;
-  }
-  .landing-features {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-  .landing-feature-grid {
-    gap: 14px;
-  }
-  .landing-feature {
-    padding: 22px 18px;
-  }
-  .landing-feature h3 {
-    font-size: 16px;
-  }
-  .landing-feature p {
-    font-size: 11px;
-  }
-  .landing-step-grid {
-    margin-left: 0;
-    margin-right: 0;
-    gap: 30px;
-  }
-  .landing-final-cta {
-    margin: 0 32px 55px;
-    padding: 36px;
-  }
-  .landing-final-cta h2 {
-    font-size: 31px;
-  }
-  .landing-final-cta .calendar-art {
+  70%,
+  100% {
     transform: scale(1);
-    margin-right: 0;
-    width: 175px;
   }
 }
-@media (max-width: 640px) {
-  .landing-header {
-    padding: 23px 23px;
-    gap: 17px;
+@keyframes hw-tap-day {
+  0%,
+  7% {
+    opacity: 0;
+    transform: scale(0.6);
   }
-  .landing-header .slotly-logo {
-    font-size: 28px;
+  8% {
+    opacity: 0.55;
   }
-  .landing-header .logo-mark {
-    width: 25px;
-    transform: scale(0.9) rotate(-12deg);
-  }
-  .landing-nav {
-    gap: 0;
-  }
-  .landing-nav a {
-    font-size: 10px;
-    white-space: nowrap;
-  }
-  .landing-nav a svg {
-    width: 11px;
-  }
-  .landing-auth {
-    gap: 0;
-  }
-  .landing-sign-in {
-    display: none;
-  }
-  .landing-nav-cta {
-    font-size: 10px;
-    padding: 8px 10px;
-    gap: 5px;
-  }
-  .landing-nav-cta svg {
-    width: 12px;
-  }
-  .landing-hero {
-    grid-template-columns: 1fr;
-    padding: 42px 28px 64px;
-    gap: 60px;
-  }
-  .landing-hero h1 {
-    font-size: clamp(40px, 10.5vw, 54px);
-    line-height: 1.1;
-    letter-spacing: -1.8px;
-    margin: 17px 0 20px;
-  }
-  .landing-eyebrow {
-    font-size: 7px;
-    letter-spacing: 1px;
-  }
-  .landing-hero-copy > p {
-    font-size: 14px;
-    line-height: 1.85;
-    max-width: 365px;
-  }
-  .landing-hero-actions {
-    margin-top: 24px;
-    gap: 22px;
-  }
-  .landing-hero-actions > .primary-button {
-    padding: 11px 15px;
-    font-size: 12px;
-  }
-  .landing-demo-button {
-    font-size: 11px;
-  }
-  .landing-hero-note {
-    max-width: none;
-    font-size: 8px;
-    margin-top: 18px;
-  }
-  .landing-hero-visual {
-    max-width: 390px;
-    width: calc(100% - 8px);
-    margin: 0 auto;
-    padding: 5px 5px 38px;
-  }
-  .landing-booking-preview {
-    padding: 23px;
-  }
-  .landing-preview-host h3 {
-    font-size: 23px;
-  }
-  .landing-preview-host p {
-    font-size: 11px;
-  }
-  .landing-preview-days > span {
-    height: 28px;
-  }
-  .landing-preview-days {
-    gap: 7px 5px;
-  }
-  .landing-confirmation-tag {
-    right: -5px;
-    padding: 12px 16px;
-  }
-  .landing-confirmation-tag strong {
-    font-size: 12px;
-  }
-  .orbit-one {
-    width: 380px;
-    height: 380px;
-    top: 9px;
-  }
-  .orbit-two {
-    width: 400px;
-    height: 400px;
-    top: -3px;
-  }
-  .landing-visual-caption {
-    font-size: 8px;
-    bottom: -14px;
-    left: 1px;
-  }
-  .spark-one {
-    left: -15px;
-    top: 40px;
-  }
-  .spark-two {
-    right: -11px;
-  }
-  .landing-principles {
-    margin: 10px 28px 0;
-    padding: 21px 0;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 17px 22px;
-  }
-  .landing-principles > span {
-    font-size: 9px;
-  }
-  .landing-features {
-    padding: 60px 28px 30px;
-  }
-  .landing-section-heading {
-    text-align: left;
-  }
-  .landing-section-heading h2 {
-    font-size: 30px;
-    letter-spacing: -0.8px;
-    margin: 13px 0 11px;
-    max-width: 350px;
-  }
-  .landing-section-heading > p {
-    font-size: 12px;
-  }
-  .landing-feature-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 28px;
-  }
-  .landing-feature {
-    padding: 25px;
-    position: relative;
-  }
-  .landing-feature-icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 20px;
-  }
-  .landing-feature-icon svg {
-    width: 22px;
-  }
-  .landing-feature-label {
-    position: absolute;
-    top: 43px;
-    left: 80px;
-    font-size: 8px;
-  }
-  .landing-feature h3 {
-    font-size: 20px;
-  }
-  .landing-feature p {
-    font-size: 12px;
-    line-height: 1.85;
-    max-width: 370px;
-  }
-  .landing-how {
-    padding: 27px 28px 42px;
-  }
-  .landing-how h2 {
-    font-size: 28px;
-  }
-  .landing-step-grid {
-    grid-template-columns: 1fr;
-    gap: 26px;
-    margin-top: 31px;
-  }
-  .landing-step-grid > article {
-    padding-left: 54px;
-  }
-  .landing-step-number {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .landing-step-grid > article:not(:last-child)::after {
-    width: 1px;
-    height: auto;
-    top: 43px;
-    left: 17px;
-    bottom: -17px;
-    right: auto;
-  }
-  .landing-step-grid h3 {
-    margin: 0 0 6px;
-    font-size: 18px;
-  }
-  .landing-step-grid p {
-    max-width: none;
-    font-size: 12px;
-  }
-  .landing-final-cta {
-    margin: 0 22px 43px;
-    padding: 30px 24px;
-    position: relative;
-    overflow: hidden;
-  }
-  .landing-final-cta > div:first-child {
-    position: relative;
-    z-index: 2;
-  }
-  .landing-final-cta h2 {
-    font-size: 29px;
-    letter-spacing: -0.8px;
-    margin-top: 15px;
-  }
-  .landing-final-cta p {
-    font-size: 11px;
-    max-width: 245px;
-  }
-  .landing-final-cta .calendar-art {
-    position: absolute;
-    opacity: 0.25;
-    right: -62px;
-    bottom: -12px;
-    transform: scale(0.9) rotate(-7deg);
-  }
-  .landing-final-cta .landing-eyebrow {
-    font-size: 6px;
-    letter-spacing: 0.8px;
-  }
-  .landing-footer {
-    margin: 0 25px;
-    padding: 23px 0;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .landing-footer > span {
-    font-size: 8px;
-    padding-left: 0;
-    margin: 0 0 0 auto;
-  }
-  .landing-footer .slotly-logo {
-    font-size: 24px;
-  }
-  .landing-footer > div {
-    width: 100%;
-    gap: 22px;
-    justify-content: flex-end;
-  }
-  .landing-footer > div > a {
-    font-size: 9px;
+  14%,
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
   }
 }
+@keyframes hw-tap-slot {
+  0%,
+  37% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  38% {
+    opacity: 0.5;
+  }
+  44%,
+  100% {
+    opacity: 0;
+    transform: scale(1.25);
+  }
+}
+@keyframes hw-tap-next {
+  0%,
+  52% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  53% {
+    opacity: 0.6;
+  }
+  59%,
+  100% {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+/* Timezone band markers glide between times. */
+.tz-marker {
+  transition:
+    left 0.8s cubic-bezier(0.3, 0.8, 0.2, 1),
+    background-color 0.3s;
+}
+
+/* Gentle float for decorative hero cards. */
+@keyframes slotly-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float {
+  animation: slotly-float 6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .landing-booking-card,
-  .landing-confirmation-tag {
-    animation: none;
+  .hw *,
+  .animate-float {
+    animation: none !important;
+  }
+  .reveal-ready [data-reveal]:not([data-visible]) {
+    opacity: 1;
+    transform: none;
   }
 }

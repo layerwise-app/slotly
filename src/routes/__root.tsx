@@ -22,12 +22,25 @@ export const Route = createRootRouteWithContext<{
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#FFFCF5" },
       ...seo({
-        title: "Slotly | Your time, your way",
-        description: "Thoughtful scheduling for great conversations.",
+        title: "Slotly | Booking links that respect your calendar",
+        description:
+          "Share one link. Guests pick an open time in their own timezone. No back-and-forth.",
       }),
     ],
-    links: [{ rel: "icon", href: "/favicon.ico" }],
+    links: [
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      {
+        rel: "preload",
+        href: "/fonts/bricolage-grotesque-latin-wght-normal.woff2",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+      },
+    ],
   }),
   errorComponent: (props) => (
     <RootDocument>

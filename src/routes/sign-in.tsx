@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChevronDownIcon } from "lucide-react";
 import { authClient } from "~/lib/auth-client";
 import { Button } from "~/components/ui/button";
+import { Spinner } from "~/components/ui/spinner";
 import {
   Card,
   CardContent,
@@ -60,15 +61,12 @@ function SignInPage() {
 
   return (
     <AuthFrame>
-      <Card className="auth-card">
-        <CardHeader>
-          <CardTitle>Welcome back.</CardTitle>
-          <CardDescription>
-            A little less scheduling awaits. Sign in with a code sent to your
-            email.
-          </CardDescription>
+      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+        <CardHeader className="px-0">
+          <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Sign in</CardTitle>
+          <CardDescription>We'll email you a six-digit code.</CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-6">
+        <CardContent className="flex flex-col px-0 gap-6">
           <form
             className="flex flex-col gap-4"
             onSubmit={(event) => {
@@ -77,9 +75,7 @@ function SignInPage() {
             }}
           >
             <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between gap-4">
-                <Label htmlFor="otp-email">Email</Label>
-              </div>
+              <Label htmlFor="otp-email">Email</Label>
               <Input
                 id="otp-email"
                 type="email"
@@ -99,12 +95,13 @@ function SignInPage() {
               </p>
             ) : null}
             <Button type="submit" disabled={sendOtp.isPending}>
-              {sendOtp.isPending ? "Sending code…" : "Continue with email"}
+              {sendOtp.isPending && <Spinner />}
+              Continue with email
             </Button>
           </form>
           <div className="flex items-center gap-3">
             <Separator className="flex-1" />
-            <span className="text-xs text-muted-foreground">OR</span>
+            <span className="text-xs text-muted-foreground">or</span>
             <Separator className="flex-1" />
           </div>
           <Collapsible>
@@ -141,7 +138,7 @@ function SignInPage() {
                     <Label htmlFor="password">Password</Label>
                     <Link
                       to="/forgot-password"
-                      className="text-sm text-muted-foreground underline"
+                      className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
                     >
                       Forgot password?
                     </Link>
@@ -164,16 +161,15 @@ function SignInPage() {
                   </p>
                 ) : null}
                 <Button type="submit" disabled={signInWithPassword.isPending}>
-                  {signInWithPassword.isPending
-                    ? "Signing in…"
-                    : "Sign in with password"}
+                  {signInWithPassword.isPending && <Spinner />}
+              Sign in with password
                 </Button>
               </form>
             </CollapsibleContent>
           </Collapsible>
           <p className="text-center text-sm text-muted-foreground">
-            Don’t have an account?{" "}
-            <Link to="/sign-up" className="underline">
+            No account yet?{" "}
+            <Link to="/sign-up" className="font-medium text-brand-text underline-offset-4 hover:underline">
               Sign up
             </Link>
           </p>

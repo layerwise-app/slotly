@@ -105,9 +105,20 @@ export const eventType = sqliteTable(
     slug: text("slug").notNull(),
     description: text("description").notNull().default(""),
     duration: integer("duration").notNull(),
+    // Legacy SQL default; the app always writes a color from COLORS.
     color: text("color").notNull().default("green"),
     active: integer("active", { mode: "boolean" }).notNull().default(true),
     createdAt: integer("created_at").notNull(),
+    minNotice: integer("min_notice").notNull().default(30),
+    bookingWindow: integer("booking_window").notNull().default(180),
+    slotInterval: integer("slot_interval").notNull().default(15),
+    dailyLimit: integer("daily_limit"),
+    locationKind: text("location_kind", {
+      enum: ["none", "video", "phone", "in_person", "custom"],
+    })
+      .notNull()
+      .default("none"),
+    locationValue: text("location_value").notNull().default(""),
   },
   (t) => [uniqueIndex("event_owner_slug").on(t.ownerId, t.slug)],
 );
@@ -136,6 +147,9 @@ export const booking = sqliteTable(
       .notNull()
       .default("confirmed"),
     createdAt: integer("created_at").notNull(),
+    cancelReason: text("cancel_reason").notNull().default(""),
+    cancelledBy: text("cancelled_by", { enum: ["guest", "host"] }),
+    cancelledAt: integer("cancelled_at"),
   },
   (t) => [
     index("booking_owner_interval").on(

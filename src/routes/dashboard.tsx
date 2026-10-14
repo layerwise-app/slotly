@@ -12,6 +12,6 @@ export const Route = createFileRoute("/dashboard")({
     if (!workspace) throw redirect({ to: "/sign-in" });
     return workspace;
   },
-  head: () => ({ meta: [{ title: "Your workspace | Slotly" }] }),
+  head: () => ({ meta: [{ title: "Dashboard | Slotly" }] }),
   component: Outlet,
 });

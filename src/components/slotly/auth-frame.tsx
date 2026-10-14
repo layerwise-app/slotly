@@ -1,48 +1,18 @@
 import type { ReactNode } from "react";
-import { Link } from "@tanstack/react-router";
-import { ArrowLeft, ShieldCheck } from "lucide-react";
-import { CalendarIllustration, SlotlyLogo } from "./brand";
+import { HeroWidget } from "~/components/landing/hero-widget";
+import { SlotlyLogo } from "./brand";
 
 export function AuthFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="auth-page">
-      <aside className="auth-story">
+    <div className="min-h-dvh lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+      <main className="flex min-h-dvh flex-col px-4 py-5 sm:px-8">
         <SlotlyLogo />
-        <div className="auth-story-content">
-          <span className="eyebrow">YOUR TIME IS A LITTLE PRECIOUS</span>
-          <h1>
-            Less scheduling.
-            <br />
-            More living.
-          </h1>
-          <p>
-            A thoughtful little home for your calendar.
-            <br />
-            Make room for the conversations that matter.
-          </p>
-          <CalendarIllustration />
-          <span className="auth-story-note">
-            <ShieldCheck size={15} />
-            Your availability stays yours. Always.
-          </span>
-        </div>
-        <span className="auth-story-footer">
-          Built for your time, not the other way around.
-        </span>
-      </aside>
-      <main className="auth-form-main">
-        <Link to="/" className="back-link">
-          <ArrowLeft size={15} />
-          Back to Slotly
-        </Link>
-        <div className="auth-mobile-logo">
-          <SlotlyLogo />
-        </div>
-        <div className="auth-card-wrap">{children}</div>
-        <p className="auth-form-footer">
-          A little less back-and-forth. A lot more possibility.
-        </p>
+        <div className="animate-rise mx-auto flex w-full max-w-sm flex-1 flex-col justify-center py-10">{children}</div>
       </main>
+      <aside className="sticky top-0 hidden h-dvh items-center justify-center overflow-hidden bg-ink p-10 lg:flex">
+        <span aria-hidden="true" className="absolute top-[18%] left-[22%] size-[420px] rounded-full bg-primary/15 blur-3xl" />
+        <HeroWidget today={Date.now()} className="animate-float relative" />
+      </aside>
     </div>
   );
 }

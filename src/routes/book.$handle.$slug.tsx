@@ -1,8 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowLeft, ShieldCheck } from "lucide-react";
+import { CalendarX2 } from "lucide-react";
 import { BookingExperience } from "~/components/slotly/booking-experience";
-import { SlotlyLogo } from "~/components/slotly/brand";
-import { getPublicEvent } from "~/lib/scheduling.functions";
+import { MessageCard, PublicShell } from "~/components/slotly/public-shell";
+import { Button } from "~/components/ui/button";
+import { getPublicEvent } from "~/lib/booking.functions";
 
 export const Route = createFileRoute("/book/$handle/$slug")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -24,19 +25,17 @@ export const Route = createFileRoute("/book/$handle/$slug")({
     ],
   }),
   notFoundComponent: () => (
-    <div className="public-page">
-      <SlotlyLogo />
-      <div className="public-missing">
-        <h1>This link is taking a little time off.</h1>
-        <p>
-          The event may be inactive or the link has changed. Ask your host for a
-          fresh booking link.
-        </p>
-        <Link className="secondary-button" to="/">
-          Back to Slotly
-        </Link>
-      </div>
-    </div>
+    <PublicShell>
+      <MessageCard
+        icon={CalendarX2}
+        title="This booking link isn't available"
+        description="It may be turned off or renamed. Ask your host for a new link."
+      >
+        <Button variant="outline" asChild>
+          <Link to="/">Go to Slotly</Link>
+        </Button>
+      </MessageCard>
+    </PublicShell>
   ),
   component: PublicBooking,
 });
@@ -45,31 +44,16 @@ function PublicBooking() {
   const event = Route.useLoaderData();
   const { reschedule } = Route.useSearch();
   return (
-    <div className="public-page">
-      <header className="public-header">
-        <SlotlyLogo />
-        <Link to="/" className="back-link">
-          <ArrowLeft size={15} />
-          Back to Slotly
+    <PublicShell>
+      <BookingExperience event={event} rescheduleToken={reschedule} />
+      <p className="mt-6 text-center text-xs text-muted-foreground">
+        <Link
+          to="/"
+          className="rounded-sm transition-colors outline-none hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50"
+        >
+          Powered by Slotly
         </Link>
-      </header>
-      <div className="public-booker-wrap">
-        <div className="public-intro">
-          <span className="eyebrow">GOOD CONVERSATIONS START HERE</span>
-          <p>A little time. A real connection.</p>
-        </div>
-        <BookingExperience event={event} rescheduleToken={reschedule} />
-        <div className="public-footer">
-          <span>
-            <ShieldCheck size={14} />
-            Thoughtfully scheduled with <strong>slotly.</strong>
-          </span>
-          <Link to="/sign-up">
-            Make time yours
-            <ArrowLeft className="rotate-180" size={14} />
-          </Link>
-        </div>
-      </div>
-    </div>
+      </p>
+    </PublicShell>
   );
 }

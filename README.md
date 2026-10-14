@@ -7,29 +7,38 @@ and production Cloudflare D1 schema. Publishing targets Cloudflare Workers.
 
 ## Scheduling
 
-- `/` is the public landing page for signed-out and signed-in visitors alike.
-  `/demo` is an isolated, read-only preview that never fetches account data.
-  `/dashboard` contains the owner's event types; `/dashboard/bookings`,
-  `/dashboard/availability`, and `/dashboard/settings` are authenticated pages.
-- Create event types with a title, description, duration, color, visibility,
-  and `/book/{username}/{event-slug}` booking URL.
-- Availability supports one time window per weekday, an IANA timezone, date
-  overrides, and before/after buffers. Slots are on a 15-minute grid with a
-  30-minute minimum notice and a 180-day booking horizon.
-- Guests choose a date, time, timezone, and details. Confirmation pages support
-  calendar-file download, cancellation, and atomic rescheduling.
-- The owner can search upcoming, past, and cancelled bookings in list/calendar
-  views. No guest or private booking data is exposed by public event/slot queries.
-- Calendar sync, payments, video integrations, and team scheduling are deferred.
+- Routes: `/` landing, `/demo` read-only preview (no account data),
+  `/dashboard` overview, `/dashboard/events`, `/dashboard/bookings`,
+  `/dashboard/availability`, `/dashboard/settings`, public
+  `/book/{username}/{event-slug}`, and private `/booking/{token}`.
+- Overview: upcoming/booked/cancelled counts, bookings per week, bookings by
+  event type, and a today/next-up agenda.
+- Event types: title, description, duration, color (amber, coral, violet, sky,
+  rose, slate), visibility, and a live preview of the booking page.
+- Per-event rules: minimum notice (default 30 min), booking window (default 180
+  days), slot interval (default 15 min), and an optional daily limit. The server
+  enforces all of them when listing slots, booking, and rescheduling.
+- Per-event location: video link, phone, in person, custom, or none. Public pages
+  show only the kind for video/phone; the full value appears on the private
+  confirmation page and in the `.ics` file.
+- Availability: one window per weekday, an IANA timezone, date overrides, and
+  before/after buffers. The booking calendar disables days without working hours
+  in the guest's timezone; the slot list for a day remains authoritative.
+- Bookings: list and calendar views, search and event filter, and a detail sheet
+  where the owner can cancel with a reason that the guest sees.
+- Guests pick a date, time, and timezone. The confirmation page offers `.ics`
+  download, rescheduling under the same link, and cancellation with a reason.
+- Calendar sync, payments, booking emails, and team scheduling are deferred.
 
 ## Security And Persistence
 
 Every owner server operation checks a Better Auth session and scopes its query
 to the session's owner ID. TanStack Start's same-origin CSRF middleware protects
 all server-function RPCs. Booking writes use a single `INSERT ... SELECT ...
-WHERE NOT EXISTS` statement, including the host-wide overlapping interval and
-buffers. Rescheduling uses the same atomic predicate in an `UPDATE`, excludes
-only the original booking, and checks the original start to reject stale edits.
+WHERE NOT EXISTS` statement, including the host-wide overlapping interval,
+buffers, and the event's daily limit. Rescheduling uses the same atomic
+predicate in an `UPDATE`, excludes only the original booking, and checks the
+original start to reject stale edits.
 The old time is not released unless the new time is secured. Existing protected
 intervals also respect newly increased buffers.
 
@@ -53,8 +62,10 @@ pnpm run build
 
 Tests require Node.js 22.18+ with native TypeScript stripping and `node:sqlite`.
 They cover timezone/date boundaries, DST folds, overrides, buffers, cross-event
-overlaps, stale and failed reschedules, cancellations, inactive/owner-mismatched
-events, and 12 concurrent independent SQLite connections claiming one slot.
+overlaps, per-event rules and daily limits, open-day calculation, locations,
+calendar files, stale and failed reschedules, cancellations,
+inactive/owner-mismatched events, and 12 concurrent independent SQLite
+connections claiming one slot.
 Tests apply Drizzle's generated migrations only to isolated temporary databases.
 
 See `THIRD_PARTY_NOTICES.md` for the Cal.diy MIT license and adapted slug utility.

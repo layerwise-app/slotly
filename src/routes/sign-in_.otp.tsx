@@ -8,6 +8,7 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authClient } from "~/lib/auth-client";
 import { Button } from "~/components/ui/button";
+import { Spinner } from "~/components/ui/spinner";
 import {
   Card,
   CardContent,
@@ -61,14 +62,14 @@ function EmailOtpPage() {
 
   return (
     <AuthFrame>
-      <Card className="auth-card">
-        <CardHeader>
-          <CardTitle>Check your email</CardTitle>
+      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+        <CardHeader className="px-0">
+          <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Check your email</CardTitle>
           <CardDescription>
             Enter the six-digit code we sent to {email}.
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-6">
+        <CardContent className="flex flex-col px-0 gap-6">
           <form
             className="flex flex-col gap-4"
             onSubmit={(event) => {
@@ -102,7 +103,8 @@ function EmailOtpPage() {
               type="submit"
               disabled={otp.length < 6 || verifyOtp.isPending}
             >
-              {verifyOtp.isPending ? "Verifying…" : "Verify and sign in"}
+              {verifyOtp.isPending && <Spinner />}
+              Verify and sign in
             </Button>
           </form>
           <div className="flex flex-col items-center gap-2 text-sm">

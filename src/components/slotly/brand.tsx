@@ -1,46 +1,56 @@
-import { ArrowUpRight, CalendarDays } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { cn } from "~/lib/utils";
 
-export function SlotlyLogo({ compact = false }: { compact?: boolean }) {
+/** Stacked time slots with the middle one picked. Mirrors public/favicon.svg. */
+export function SlotlyMark({ className }: { className?: string }) {
   return (
-    <Link to="/" className="slotly-logo" aria-label="Slotly home">
-      <span className="logo-mark">
-        <span />
-        <span />
-        <span />
-      </span>
+    <svg
+      viewBox="0 0 32 32"
+      aria-hidden="true"
+      className={cn("size-8 shrink-0", className)}
+    >
+      <rect width="32" height="32" rx="10" fill="#FFB224" />
+      <rect x="7" y="7.5" width="18" height="4.5" rx="2.25" fill="#1F1300" opacity=".25" />
+      <rect x="7" y="13.75" width="18" height="4.5" rx="2.25" fill="#1F1300" />
+      <rect x="7" y="20" width="11" height="4.5" rx="2.25" fill="#1F1300" opacity=".25" />
+    </svg>
+  );
+}
+
+export function SlotlyLogo({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
+  return (
+    <Link
+      to="/"
+      aria-label="Slotly home"
+      className={cn(
+        "inline-flex items-center gap-2 rounded-lg outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+        className,
+      )}
+    >
+      <SlotlyMark className="size-7" />
       {!compact && (
-        <span>
-          slotly<span className="logo-period">.</span>
+        <span className="font-heading text-xl font-semibold tracking-tight">
+          Slotly
         </span>
       )}
     </Link>
   );
 }
 
-export function CalendarIllustration() {
+export function initials(name: string) {
   return (
-    <div className="calendar-art" aria-hidden="true">
-      <span className="art-spark one">+</span>
-      <span className="art-spark two">+</span>
-      <div className="art-circle" />
-      <div className="art-card">
-        <div className="art-card-top">
-          <span />
-          <span />
-          <b>YOUR TIME, SIMPLIFIED</b>
-        </div>
-        <div className="art-days">
-          {Array.from({ length: 14 }, (_, i) => (
-            <span className={i === 9 ? "art-selected" : ""} key={i}>
-              {i === 9 ? <CalendarDays size={15} /> : i + 1}
-            </span>
-          ))}
-        </div>
-      </div>
-      <span className="art-float">
-        <ArrowUpRight size={20} />
-      </span>
-    </div>
+    name
+      .split(/\s+/)
+      .filter(Boolean)
+      .map((part) => part[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase() || "S"
   );
 }

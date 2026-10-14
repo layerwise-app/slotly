@@ -1,22 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { SlotlyLogo } from "~/components/slotly/brand";
+import { Compass } from "lucide-react";
+import { MessageCard, PublicShell } from "~/components/slotly/public-shell";
+import { Button } from "~/components/ui/button";
 
 export function NotFound({ children }: { children?: ReactNode }) {
   return (
-    <div className="public-page">
-      <SlotlyLogo />
-      <div className="public-missing">
-        <span className="eyebrow">A SMALL DETOUR</span>
-        <h1>This page is taking a little time off.</h1>
-        <p>
-          {children ||
-            "The link may have changed. Let us get you back to your schedule."}
-        </p>
-        <Link to="/" className="primary-button">
-          Back to Slotly
-        </Link>
-      </div>
-    </div>
+    <PublicShell>
+      <MessageCard icon={Compass} title="Page not found" description={children || "The link may have changed."}>
+        <Button asChild>
+          <Link to="/">Go home</Link>
+        </Button>
+      </MessageCard>
+    </PublicShell>
   );
 }

@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { authClient } from "~/lib/auth-client";
 import { Button } from "~/components/ui/button";
+import { Spinner } from "~/components/ui/spinner";
 import {
   Card,
   CardContent,
@@ -53,14 +54,14 @@ function ForgotPasswordPage() {
   if (resetPassword.isSuccess) {
     return (
       <AuthFrame>
-        <Card className="auth-card">
-          <CardHeader>
-            <CardTitle>Password reset</CardTitle>
+        <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+          <CardHeader className="px-0">
+            <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Password reset</CardTitle>
             <CardDescription>
-              Your password has been updated. You can now sign in.
+              Your password is updated.
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="px-0">
             <Button asChild className="w-full">
               <Link to="/sign-in">Back to sign in</Link>
             </Button>
@@ -72,14 +73,14 @@ function ForgotPasswordPage() {
 
   return (
     <AuthFrame>
-      <Card className="auth-card">
-        <CardHeader>
-          <CardTitle>Reset your password</CardTitle>
+      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+        <CardHeader className="px-0">
+          <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Reset your password</CardTitle>
           <CardDescription>
-            We’ll send a six-digit reset code to your email.
+            We'll email you a six-digit reset code.
           </CardDescription>
         </CardHeader>
-        <CardContent className="flex flex-col gap-4">
+        <CardContent className="flex flex-col px-0 gap-4">
           <form
             className="flex flex-col gap-4"
             onSubmit={(event) => {
@@ -193,7 +194,8 @@ function ForgotPasswordPage() {
                   otp.length < 6 || !passwordsMatch || resetPassword.isPending
                 }
               >
-                {resetPassword.isPending ? "Resetting…" : "Reset password"}
+                {resetPassword.isPending && <Spinner />}
+              Reset password
               </Button>
             </form>
           ) : null}

@@ -3,6 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authClient } from "~/lib/auth-client";
 import { Button } from "~/components/ui/button";
+import { Spinner } from "~/components/ui/spinner";
 import {
   Card,
   CardContent,
@@ -44,14 +45,12 @@ function SignUpPage() {
 
   return (
     <AuthFrame>
-      <Card className="auth-card">
-        <CardHeader>
-          <CardTitle>Make time yours.</CardTitle>
-          <CardDescription>
-            Create your personal workspace. Good conversations start here.
-          </CardDescription>
+      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+        <CardHeader className="px-0">
+          <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Create your account</CardTitle>
+          <CardDescription>Free. Your booking link is ready in a minute.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="px-0">
           <form
             className="flex flex-col gap-4"
             onSubmit={(event) => {
@@ -118,22 +117,15 @@ function SignUpPage() {
               type="submit"
               disabled={!passwordsMatch || signUp.isPending}
             >
-              {signUp.isPending
-                ? "Creating workspace..."
-                : "Create your workspace"}
+              {signUp.isPending && <Spinner />}
+              Create account
             </Button>
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{" "}
-              <Link to="/sign-in" className="underline">
+              <Link to="/sign-in" className="font-medium text-brand-text underline-offset-4 hover:underline">
                 Sign in
               </Link>
             </p>
-            <Link
-              to="/demo"
-              className="text-center text-xs text-muted-foreground"
-            >
-              Explore the preview first
-            </Link>
           </form>
         </CardContent>
       </Card>

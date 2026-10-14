@@ -1,17 +1,10 @@
-import { Loader2 } from "lucide-react";
-import { SlotlyLogo } from "./brand";
+import { SlotlyMark } from "./brand";
 
 export function SlotlyLoading() {
   return (
-    <div className="slotly-loading">
-      <SlotlyLogo />
-      <div className="loading-content">
-        <Loader2 size={23} className="animate-spin" />
-        <p>Making a little room for your schedule...</p>
-        <div className="loading-card slot-skeleton" />
-        <div className="loading-card slot-skeleton" />
-        <div className="loading-card slot-skeleton" />
-      </div>
+    <div role="status" className="flex min-h-dvh items-center justify-center">
+      <SlotlyMark className="size-10 animate-pulse" />
+      <span className="sr-only">Loading</span>
     </div>
   );
 }

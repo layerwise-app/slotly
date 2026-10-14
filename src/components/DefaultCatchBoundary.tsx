@@ -1,36 +1,22 @@
-import {
-  Link,
-  useRouter,
-  type ErrorComponentProps,
-} from "@tanstack/react-router";
-import { RefreshCw } from "lucide-react";
-import { SlotlyLogo } from "~/components/slotly/brand";
+import { Link, useRouter, type ErrorComponentProps } from "@tanstack/react-router";
+import { RefreshCw, TriangleAlert } from "lucide-react";
+import { MessageCard, PublicShell } from "~/components/slotly/public-shell";
+import { Button } from "~/components/ui/button";
 
 export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
   const router = useRouter();
   console.error(error);
   return (
-    <div className="public-page">
-      <SlotlyLogo />
-      <div className="public-missing">
-        <h1>A little hiccup in the schedule.</h1>
-        <p>
-          We could not load this page. Please try again in a moment, or return
-          to your workspace.
-        </p>
-        <div className="error-actions">
-          <button
-            className="primary-button"
-            onClick={() => void router.invalidate()}
-          >
-            <RefreshCw size={15} />
-            Try again
-          </button>
-          <Link to="/" className="secondary-button">
-            Back to Slotly
-          </Link>
-        </div>
-      </div>
-    </div>
+    <PublicShell>
+      <MessageCard icon={TriangleAlert} title="Something went wrong" description="This page couldn't load. Try again in a moment.">
+        <Button onClick={() => void router.invalidate()}>
+          <RefreshCw />
+          Try again
+        </Button>
+        <Button variant="outline" asChild>
+          <Link to="/">Go home</Link>
+        </Button>
+      </MessageCard>
+    </PublicShell>
   );
 }

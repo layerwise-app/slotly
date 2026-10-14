@@ -1,61 +1,75 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import { cn } from "~/lib/utils";
 
+const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+function monthKey(year: number, monthIndex: number) {
+  const date = new Date(Date.UTC(year, monthIndex, 1));
+  return date.toISOString().slice(0, 7);
+}
+
+/** Month grid keyed by YYYY-MM-DD strings; min/max bound selectable dates. */
 export function MonthCalendar({
   month,
   setMonth,
   selected,
   onSelect,
-  disablePast = true,
+  today,
+  min,
+  max,
   counts,
+  open,
+  className,
 }: {
   month: string;
   setMonth: (month: string) => void;
   selected?: string;
   onSelect: (date: string) => void;
-  disablePast?: boolean;
+  today: string;
+  min?: string;
+  max?: string;
   counts?: Record<string, number>;
+  /** Days with availability; other days in range are disabled. */
+  open?: Set<string>;
+  className?: string;
 }) {
-  const [year, number] = month.split("-").map(Number);
-  const first = new Date(year!, number! - 1, 1);
-  const length = new Date(year!, number!, 0).getDate();
-  const offset = (first.getDay() + 6) % 7;
-  const today = new Date();
-  const todayKey = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
-  const shift = (by: number) => {
-    const date = new Date(year!, number! - 1 + by, 1);
-    setMonth(
-      `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`,
-    );
-  };
+  const [year, number] = month.split("-").map(Number) as [number, number];
+  const first = new Date(Date.UTC(year, number - 1, 1));
+  const length = new Date(Date.UTC(year, number, 0)).getUTCDate();
+  const offset = (first.getUTCDay() + 6) % 7;
+  const previous = monthKey(year, number - 2);
+  const next = monthKey(year, number);
   return (
-    <div className="month-calendar">
-      <div className="month-heading">
-        <h3>
-          {first.toLocaleDateString("en-US", {
-            month: "long",
-            year: "numeric",
-          })}
+    <div className={cn("select-none", className)}>
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <h3 className="text-base font-semibold" aria-live="polite">
+          {first.toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" })}
         </h3>
-        <div>
-          <button
-            className="icon-button"
+        <div className="flex gap-1">
+          <Button
+            variant="ghost"
+            size="icon-sm"
             aria-label="Previous month"
-            onClick={() => shift(-1)}
+            disabled={!!min && previous < min.slice(0, 7)}
+            onClick={() => setMonth(previous)}
           >
-            <ChevronLeft size={17} />
-          </button>
-          <button
-            className="icon-button"
+            <ChevronLeft />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon-sm"
             aria-label="Next month"
-            onClick={() => shift(1)}
+            disabled={!!max && next > max.slice(0, 7)}
+            onClick={() => setMonth(next)}
           >
-            <ChevronRight size={17} />
-          </button>
+            <ChevronRight />
+          </Button>
         </div>
       </div>
-      <div className="month-grid">
-        {["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"].map((day) => (
-          <span className="weekday" key={day}>
+      <div className="grid grid-cols-7 gap-1 text-center">
+        {WEEKDAYS.map((day) => (
+          <span key={day} className="pb-1 text-xs font-medium text-muted-foreground">
             {day}
           </span>
         ))}
@@ -64,20 +78,38 @@ export function MonthCalendar({
         ))}
         {Array.from({ length }, (_, i) => {
           const date = `${month}-${String(i + 1).padStart(2, "0")}`;
-          const disabled =
-            disablePast &&
-            (date < todayKey || Date.parse(date) > Date.now() + 180 * 86400000);
+          const disabled = (!!min && date < min) || (!!max && date > max) || (!!open && !open.has(date));
+          const isSelected = selected === date;
+          const count = counts?.[date] ?? 0;
           return (
             <button
               key={date}
+              type="button"
               disabled={disabled}
-              aria-label={`${date}${counts?.[date] ? `, ${counts[date]} bookings` : ""}`}
-              aria-pressed={selected === date}
-              className={`calendar-day ${selected === date ? "selected" : ""} ${date === todayKey ? "today" : ""}`}
+              aria-label={`${date}${count ? `, ${count} bookings` : ""}`}
+              aria-pressed={isSelected}
               onClick={() => onSelect(date)}
+              className={cn(
+                "relative mx-auto flex aspect-square w-full max-w-11 items-center justify-center rounded-full text-sm font-medium tabular-nums transition-[background-color,color,transform] outline-none focus-visible:ring-3 focus-visible:ring-ring/50",
+                disabled
+                  ? "cursor-default text-muted-foreground/45"
+                  : "bg-accent/70 text-foreground hover:bg-accent hover:text-brand-text active:scale-95",
+                !min && !disabled && "bg-transparent hover:bg-muted",
+                date === today && "font-bold",
+                date === today && !isSelected && !disabled && "text-brand-text",
+                isSelected && "bg-primary text-primary-foreground hover:bg-primary-hover hover:text-primary-foreground",
+              )}
             >
               {i + 1}
-              {counts?.[date] ? <span className="booking-dot" /> : null}
+              {count > 0 && (
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute bottom-1 size-1 rounded-full",
+                    isSelected ? "bg-primary-foreground" : "bg-brand-text",
+                  )}
+                />
+              )}
             </button>
           );
         })}
