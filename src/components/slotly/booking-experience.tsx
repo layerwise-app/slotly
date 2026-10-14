@@ -252,7 +252,7 @@ export function BookingExperience({
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-2 p-0.5 sm:max-h-[27rem] sm:overflow-y-auto">
+          <div className="-mx-0.5 flex scroll-py-1 flex-col gap-2 p-1 sm:max-h-[27rem] sm:overflow-y-auto">
             {loading ? (
               Array.from({ length: 6 }, (_, i) => <Skeleton key={i} className="h-12 shrink-0 rounded-xl" />)
             ) : !preview && slots.isError ? (

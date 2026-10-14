@@ -98,7 +98,7 @@ export function EventEditor({
         </SheetHeader>
         <form
           id="event-editor"
-          className="flex-1 overflow-y-auto p-6"
+          className="flex-1 scroll-py-6 overflow-y-auto p-6"
           onSubmit={(e) => {
             e.preventDefault();
             if (demo) gate();

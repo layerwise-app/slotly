@@ -61,7 +61,7 @@ function SignInPage() {
 
   return (
     <AuthFrame>
-      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+      <Card className="gap-7 overflow-visible bg-transparent py-0 shadow-none ring-0">
         <CardHeader className="px-0">
           <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Sign in</CardTitle>
           <CardDescription>We'll email you a six-digit code.</CardDescription>

@@ -111,7 +111,7 @@ function Details({
           {item.title}
         </SheetDescription>
       </SheetHeader>
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 scroll-py-6 overflow-y-auto p-6">
         <dl className="grid gap-5 text-sm">
           <Row label="When">
             {formatDate(item.start, zone)}

@@ -54,7 +54,7 @@ function ForgotPasswordPage() {
   if (resetPassword.isSuccess) {
     return (
       <AuthFrame>
-        <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+        <Card className="gap-7 overflow-visible bg-transparent py-0 shadow-none ring-0">
           <CardHeader className="px-0">
             <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Password reset</CardTitle>
             <CardDescription>
@@ -73,7 +73,7 @@ function ForgotPasswordPage() {
 
   return (
     <AuthFrame>
-      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+      <Card className="gap-7 overflow-visible bg-transparent py-0 shadow-none ring-0">
         <CardHeader className="px-0">
           <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Reset your password</CardTitle>
           <CardDescription>

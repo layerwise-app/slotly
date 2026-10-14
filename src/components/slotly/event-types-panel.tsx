@@ -246,7 +246,7 @@ export function EventTypesPanel() {
         onClose={() => setEditor((current) => ({ ...current, open: false }))}
       />
       <Dialog open={!!preview} onOpenChange={(open) => !open && setPreview(null)}>
-        <DialogContent className="max-h-[92dvh] overflow-y-auto bg-background p-0 sm:max-w-5xl">
+        <DialogContent className="max-h-[92dvh] scroll-py-6 overflow-y-auto bg-background p-0 sm:max-w-5xl">
           <DialogHeader className="px-6 pt-6">
             <DialogTitle className="text-lg font-semibold">Preview</DialogTitle>
             <DialogDescription>What guests see. Booking is disabled here.</DialogDescription>

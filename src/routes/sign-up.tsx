@@ -45,7 +45,7 @@ function SignUpPage() {
 
   return (
     <AuthFrame>
-      <Card className="gap-7 bg-transparent py-0 shadow-none ring-0">
+      <Card className="gap-7 overflow-visible bg-transparent py-0 shadow-none ring-0">
         <CardHeader className="px-0">
           <CardTitle className="font-heading text-3xl font-semibold tracking-tight">Create your account</CardTitle>
           <CardDescription>Free. Your booking link is ready in a minute.</CardDescription>
