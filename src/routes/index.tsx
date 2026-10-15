@@ -4,6 +4,7 @@ import { AvailabilityFragment, BookingsFragment, EventTypesFragment } from "~/co
 import { HeroWidget } from "~/components/landing/hero-widget";
 import { TimezoneBand } from "~/components/landing/timezone-band";
 import { useReveal } from "~/components/landing/use-reveal";
+import { PoweredByLayerwise } from "~/components/powered-by-layerwise";
 import { SlotlyLogo } from "~/components/slotly/brand";
 import { Button } from "~/components/ui/button";
 import { getAuthSession } from "~/lib/auth.functions";
@@ -172,6 +173,9 @@ function Home() {
             Sign in
           </Link>
           <span>© {new Date(today).getUTCFullYear()} Slotly</span>
+        </div>
+        <div className="mx-auto flex max-w-6xl justify-center px-4 pb-8 sm:px-6">
+          <PoweredByLayerwise />
         </div>
       </footer>
     </div>
