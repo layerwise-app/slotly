@@ -1,5 +1,12 @@
 # Slotly
 
+<a href="https://layerwise.app">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://layerwise.app/powered-by-dark.png" />
+    <img src="https://layerwise.app/powered-by.png" alt="Powered by Layerwise" width="320" />
+  </picture>
+</a>
+
 A focused individual scheduling app inspired by Cal.diy, built on the existing
 Layerwise React / TypeScript / TanStack Start / TanStack Query stack. Styling uses
 Tailwind and shadcn/ui; authentication uses Better Auth; Drizzle owns the local
@@ -71,8 +78,6 @@ Tests apply Drizzle's generated migrations only to isolated temporary databases.
 See `THIRD_PARTY_NOTICES.md` for the Cal.diy MIT license and adapted slug utility.
 
 ## Layerwise Integration
-
-<a href="https://layerwise.app"><img src="https://layerwise.app/powered-by.png" alt="Powered by Layerwise" width="320" /></a>
 
 This is the starter used for new Layerwise projects. It is a full-stack React
 app built with TanStack Start and deployed to Cloudflare Workers. The template

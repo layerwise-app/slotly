@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { AvailabilityFragment, BookingsFragment, EventTypesFragment } from "~/components/landing/feature-fragments";
+import { GitHubButton } from "~/components/landing/github-button";
 import { HeroWidget } from "~/components/landing/hero-widget";
 import { TimezoneBand } from "~/components/landing/timezone-band";
 import { useReveal } from "~/components/landing/use-reveal";
@@ -51,6 +52,7 @@ function Home() {
       <header className="sticky top-0 z-40 border-b border-transparent bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
           <SlotlyLogo className="mr-auto" />
+          <GitHubButton />
           <Button variant="ghost" asChild className="hidden sm:inline-flex">
             <Link to="/demo">Demo</Link>
           </Button>
