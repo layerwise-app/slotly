@@ -16,6 +16,8 @@ import {
 } from "~/components/ui/empty";
 import { eventColor } from "~/lib/scheduling";
 import { LOCATION_LABELS, type LocationKind } from "~/lib/location";
+
+export { locationHref } from "~/lib/location";
 import { cn } from "~/lib/utils";
 
 export function errorMessage(error: Error) {
@@ -80,14 +82,6 @@ export function locationSummary(kind: LocationKind, value: string) {
   if (kind === "none") return "";
   if (kind === "video" || kind === "phone") return LOCATION_LABELS[kind];
   return value || LOCATION_LABELS[kind];
-}
-
-export function locationHref(kind: LocationKind, value: string) {
-  if (kind === "video") return value;
-  if (kind === "phone") return `tel:${value.replace(/[^+0-9]/g, "")}`;
-  if (kind === "in_person")
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value)}`;
-  return undefined;
 }
 
 export function formatMinutes(total: number) {

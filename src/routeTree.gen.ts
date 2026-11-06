@@ -23,6 +23,7 @@ import { Route as DashboardEventsRouteImport } from './routes/dashboard.events'
 import { Route as DashboardSettingsRouteImport } from './routes/dashboard.settings'
 import { Route as SignInOtpRouteImport } from './routes/sign-in_.otp'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as AvatarsOwnerIdFileRouteImport } from './routes/avatars.$ownerId.$file'
 import { Route as BookHandleSlugRouteImport } from './routes/book.$handle.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -95,6 +96,11 @@ const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   path: '/api/auth/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AvatarsOwnerIdFileRoute = AvatarsOwnerIdFileRouteImport.update({
+  id: '/avatars/$ownerId/$file',
+  path: '/avatars/$ownerId/$file',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookHandleSlugRoute = BookHandleSlugRouteImport.update({
   id: '/book/$handle/$slug',
   path: '/book/$handle/$slug',
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/sign-in/otp': typeof SignInOtpRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/avatars/$ownerId/$file': typeof AvatarsOwnerIdFileRoute
   '/book/$handle/$slug': typeof BookHandleSlugRoute
 }
 export interface FileRoutesByTo {
@@ -132,6 +139,7 @@ export interface FileRoutesByTo {
   '/sign-in/otp': typeof SignInOtpRoute
   '/dashboard': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/avatars/$ownerId/$file': typeof AvatarsOwnerIdFileRoute
   '/book/$handle/$slug': typeof BookHandleSlugRoute
 }
 export interface FileRoutesById {
@@ -150,6 +158,7 @@ export interface FileRoutesById {
   '/sign-in_/otp': typeof SignInOtpRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/avatars/$ownerId/$file': typeof AvatarsOwnerIdFileRoute
   '/book/$handle/$slug': typeof BookHandleSlugRoute
 }
 export interface FileRouteTypes {
@@ -169,6 +178,7 @@ export interface FileRouteTypes {
     | '/sign-in/otp'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/avatars/$ownerId/$file'
     | '/book/$handle/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -185,6 +195,7 @@ export interface FileRouteTypes {
     | '/sign-in/otp'
     | '/dashboard'
     | '/api/auth/$'
+    | '/avatars/$ownerId/$file'
     | '/book/$handle/$slug'
   id:
     | '__root__'
@@ -202,6 +213,7 @@ export interface FileRouteTypes {
     | '/sign-in_/otp'
     | '/dashboard/'
     | '/api/auth/$'
+    | '/avatars/$ownerId/$file'
     | '/book/$handle/$slug'
   fileRoutesById: FileRoutesById
 }
@@ -215,6 +227,7 @@ export interface RootRouteChildren {
   BookingTokenRoute: typeof BookingTokenRoute
   SignInOtpRoute: typeof SignInOtpRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  AvatarsOwnerIdFileRoute: typeof AvatarsOwnerIdFileRoute
   BookHandleSlugRoute: typeof BookHandleSlugRoute
 }
 
@@ -318,6 +331,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAuthSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/avatars/$ownerId/$file': {
+      id: '/avatars/$ownerId/$file'
+      path: '/avatars/$ownerId/$file'
+      fullPath: '/avatars/$ownerId/$file'
+      preLoaderRoute: typeof AvatarsOwnerIdFileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/book/$handle/$slug': {
       id: '/book/$handle/$slug'
       path: '/book/$handle/$slug'
@@ -358,6 +378,7 @@ const rootRouteChildren: RootRouteChildren = {
   BookingTokenRoute: BookingTokenRoute,
   SignInOtpRoute: SignInOtpRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  AvatarsOwnerIdFileRoute: AvatarsOwnerIdFileRoute,
   BookHandleSlugRoute: BookHandleSlugRoute,
 }
 export const routeTree = rootRouteImport

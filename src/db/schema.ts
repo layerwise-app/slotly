@@ -92,6 +92,8 @@ export const schedulingProfile = sqliteTable("scheduling_profile", {
     .notNull(),
   bufferBefore: integer("buffer_before").notNull().default(0),
   bufferAfter: integer("buffer_after").notNull().default(0),
+  // Layerwise Storage key of the public host photo; URLs are built on render.
+  avatarKey: text("avatar_key"),
 });
 
 export const eventType = sqliteTable(

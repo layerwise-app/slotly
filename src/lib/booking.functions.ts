@@ -2,6 +2,8 @@ import { createServerFn } from "@tanstack/react-start";
 import { and, eq, lt, gt, gte } from "drizzle-orm";
 import { db } from "~/db";
 import { schedulingProfile, eventType, booking, user } from "~/db/schema";
+import { avatarUrl } from "~/lib/avatar";
+import { sendBookingEmails } from "~/lib/booking-email";
 import {
   insertBookingIfAvailable,
   rescheduleBookingIfAvailable,
@@ -49,6 +51,7 @@ export const getPublicEvent = createServerFn({ method: "GET" })
         handle: schedulingProfile.handle,
         timezone: schedulingProfile.timezone,
         bio: schedulingProfile.bio,
+        avatarKey: schedulingProfile.avatarKey,
         weekly: schedulingProfile.weekly,
         overrides: schedulingProfile.overrides,
       })
@@ -65,14 +68,16 @@ export const getPublicEvent = createServerFn({ method: "GET" })
           eq(eventType.active, true),
         ),
       );
-    const row = rows[0];
-    if (!row) return null;
+    const found = rows[0];
+    if (!found) return null;
+    const { avatarKey, ...row } = found;
     const { locationKind, locationValue } = row.event;
     // Working hours only mark open days on the calendar; slot lists already
     // reveal them. Past overrides are dropped.
     const yesterday = dateKey(Date.now() - 86400000, row.timezone);
     return {
       ...row,
+      image: avatarUrl(avatarKey, row.image),
       overrides: row.overrides.filter((item) => item.date >= yesterday),
       event: {
         ...row.event,
@@ -245,6 +250,7 @@ export const createBooking = createServerFn({ method: "POST" })
         throw new Error(
           "That time was just taken or your booking changed. Please choose another time.",
         );
+      await sendBookingEmails("rescheduled", previous.id, previous.start);
       return changed[0]!;
     }
     const id = crypto.randomUUID();
@@ -269,6 +275,7 @@ export const createBooking = createServerFn({ method: "POST" })
     );
     if (!inserted.length)
       throw new Error("That time was just taken. Please choose another time.");
+    await sendBookingEmails("booked", id);
     return inserted[0]!;
   });
 
@@ -335,5 +342,6 @@ export const cancelBooking = createServerFn({ method: "POST" })
     );
     if (!result.length)
       throw new Error("Booking not found, already cancelled, or in the past.");
+    await sendBookingEmails("cancelled", result[0]!.id);
     return { success: true };
   });

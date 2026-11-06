@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ExternalLink } from "lucide-react";
@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "~/components/ui/label";
 import { Spinner } from "~/components/ui/spinner";
 import { Textarea } from "~/components/ui/textarea";
+import { AVATAR_ACCEPT, removeAvatar, uploadAvatar } from "~/lib/avatar.functions";
 import { saveProfile } from "~/lib/scheduling.functions";
 import { initials } from "./brand";
 import { PageHeader, errorMessage } from "./shared";
@@ -25,6 +26,26 @@ export function ProfileEditor() {
       toast.success("Profile saved");
     },
   });
+  const photoInput = useRef<HTMLInputElement>(null);
+  const upload = useMutation({
+    mutationFn: (file: File) => {
+      const form = new FormData();
+      form.set("file", file);
+      return uploadAvatar({ data: form });
+    },
+    onSuccess: async () => {
+      await refresh();
+      toast.success("Photo updated");
+    },
+  });
+  const removePhoto = useMutation({
+    mutationFn: () => removeAvatar(),
+    onSuccess: async () => {
+      await refresh();
+      toast.success("Photo removed");
+    },
+  });
+  const photoError = upload.error ?? removePhoto.error;
   const firstActive = events.find((event) => event.active);
   return (
     <>
@@ -44,6 +65,67 @@ export function ProfileEditor() {
             }}
           >
             <CardContent className="flex flex-col gap-5">
+              <div className="flex flex-col gap-2">
+                <Label htmlFor="profile-photo">Photo</Label>
+                <div className="flex flex-wrap items-center gap-3">
+                  {data?.user.image ? (
+                    <img src={data.user.image} alt="" className="size-12 rounded-full object-cover" />
+                  ) : (
+                    <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-ink font-heading text-sm font-semibold text-white">
+                      {initials(name)}
+                    </span>
+                  )}
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    disabled={upload.isPending || removePhoto.isPending}
+                    onClick={() => {
+                      removePhoto.reset();
+                      if (demo) gate();
+                      else photoInput.current?.click();
+                    }}
+                  >
+                    {upload.isPending && <Spinner />}
+                    Upload photo
+                  </Button>
+                  {profile.avatarKey && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      disabled={upload.isPending || removePhoto.isPending}
+                      onClick={() => {
+                        upload.reset();
+                        removePhoto.mutate();
+                      }}
+                    >
+                      {removePhoto.isPending && <Spinner />}
+                      Remove
+                    </Button>
+                  )}
+                  <input
+                    id="profile-photo"
+                    ref={photoInput}
+                    type="file"
+                    accept={AVATAR_ACCEPT}
+                    tabIndex={-1}
+                    className="sr-only"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      e.target.value = "";
+                      if (file) upload.mutate(file);
+                    }}
+                  />
+                </div>
+                {photoError ? (
+                  <p role="alert" className="text-sm text-destructive">
+                    {errorMessage(photoError)}
+                  </p>
+                ) : (
+                  <p className="text-sm text-muted-foreground">JPEG, PNG, WebP, or GIF, up to 2 MB.</p>
+                )}
+              </div>
               <div className="flex flex-col gap-2">
                 <Label htmlFor="profile-handle">Username</Label>
                 <div className="flex h-9 items-center overflow-hidden rounded-md border border-input bg-card shadow-xs focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/50 has-aria-invalid:border-destructive">

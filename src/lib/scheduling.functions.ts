@@ -4,6 +4,7 @@ import { and, eq, desc, notExists } from "drizzle-orm";
 import { db } from "~/db";
 import { schedulingProfile, eventType, booking } from "~/db/schema";
 import { auth } from "~/lib/auth";
+import { avatarUrl } from "~/lib/avatar";
 import { parseLocation } from "~/lib/location";
 import {
   COLORS,
@@ -63,7 +64,7 @@ export const getWorkspace = createServerFn({ method: "GET" }).handler(
         id: session.user.id,
         name: session.user.name,
         email: session.user.email,
-        image: session.user.image,
+        image: avatarUrl(profile.avatarKey, session.user.image),
       },
       profile,
       events,

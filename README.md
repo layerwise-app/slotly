@@ -35,7 +35,15 @@ and production Cloudflare D1 schema. Publishing targets Cloudflare Workers.
   where the owner can cancel with a reason that the guest sees.
 - Guests pick a date, time, and timezone. The confirmation page offers `.ics`
   download, rescheduling under the same link, and cancellation with a reason.
-- Calendar sync, payments, booking emails, and team scheduling are deferred.
+- Booking emails (Layerwise Email): guests get a confirmation and notices when
+  the booking is rescheduled or cancelled, with the private management link;
+  hosts get notices of new bookings, reschedules, and guest cancellations, with
+  a link to the booking in the dashboard. Guest emails reply to the host's
+  account email and host emails reply to the guest.
+- Host photo (Layerwise Storage): uploaded in Settings and shown on public
+  booking pages. The file stays private in Storage and is served by
+  `/avatars/<ownerId>/<file>` only while it is a host's current photo.
+- Calendar sync, payments, and team scheduling are deferred.
 
 ## Security And Persistence
 
@@ -55,7 +63,12 @@ anyone with a token can view and manage that booking. These pages are marked
 instead of deleted. React escapes guest-provided content.
 
 Booking confirmation is on-page, with a private management link and `.ics`
-download. It does not claim to send booking emails. Authentication OTP and
+download, and is also emailed once the booking is saved. Booking emails are
+sent only after a booking write succeeds; an email failure is logged and never
+fails or rolls back the booking. Guest emails include the full location like
+the confirmation page, and all user-provided values are escaped in HTML. In the
+local preview, email appears under Email → Local in the Layerwise app; real
+email is sent after publishing. Authentication OTP and
 password-reset emails use the existing `sendAuthEmail` integration, with visible
 delivery errors and development logging when a provider is not injected.
 
@@ -71,8 +84,9 @@ Tests require Node.js 22.18+ with native TypeScript stripping and `node:sqlite`.
 They cover timezone/date boundaries, DST folds, overrides, buffers, cross-event
 overlaps, per-event rules and daily limits, open-day calculation, locations,
 calendar files, stale and failed reschedules, cancellations,
-inactive/owner-mismatched events, and 12 concurrent independent SQLite
-connections claiming one slot.
+inactive/owner-mismatched events, 12 concurrent independent SQLite
+connections claiming one slot, and booking email content (guest timezone,
+HTML escaping, and location visibility).
 Tests apply Drizzle's generated migrations only to isolated temporary databases.
 
 See `THIRD_PARTY_NOTICES.md` for the Cal.diy MIT license and adapted slug utility.
@@ -108,10 +122,14 @@ during publishing.
 - `src/routes/`: TanStack Router file routes
 - `src/lib/auth.ts`: Better Auth server configuration
 - `src/lib/auth.functions.ts`: client-callable server functions
+- `src/lib/booking-email.ts`, `src/lib/booking-email-content.ts`: booking
+  emails through `env.EMAIL` (`src/lib/email.ts`)
+- `src/lib/avatar.functions.ts`: host photo through `env.STORAGE`
+  (`src/lib/storage.ts`)
 - `src/db/schema.ts`: Drizzle schema
 - `vite.config.ts`: Cloudflare, TanStack Start, React, Tailwind, and Layerwise
   plugins
-- `wrangler.jsonc`: local Worker and D1 bindings
+- `wrangler.jsonc`: local Worker, D1, Storage, and Email bindings
 
 Keep secrets server-side. Variables prefixed with `VITE_` are included in the
 browser bundle. `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, and `AUTH_EMAIL_URL`

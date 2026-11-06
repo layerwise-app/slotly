@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite dev",
     "check-types": "tsc --noEmit",
-    "test": "node --test tests/scheduling.test.mjs",
+    "test": "node --test tests/scheduling.test.mjs tests/booking-email.test.mjs",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
     "start": "node .output/server/index.mjs",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.58.0",
-    "@layerwise/vite": "^0.1.8",
+    "@layerwise/vite": "^0.1.11",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.2",
     "@types/react": "^19.3.0",

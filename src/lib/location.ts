@@ -37,3 +37,11 @@ export function parseLocation(kind: unknown, value: unknown) {
 export function publicLocation(kind: LocationKind, value: string) {
   return kind === "in_person" || kind === "custom" ? value : "";
 }
+
+export function locationHref(kind: LocationKind, value: string) {
+  if (kind === "video") return value;
+  if (kind === "phone") return `tel:${value.replace(/[^+0-9]/g, "")}`;
+  if (kind === "in_person")
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(value)}`;
+  return undefined;
+}

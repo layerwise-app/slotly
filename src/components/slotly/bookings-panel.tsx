@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearch } from "@tanstack/react-router";
 import { CalendarDays, CalendarSearch, ChevronRight, List, Search } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -38,7 +39,9 @@ export function BookingsPanel() {
   const [limit, setLimit] = useState(PAGE);
   const [day, setDay] = useState(today);
   const [month, setMonth] = useState(today.slice(0, 7));
-  const [open, setOpen] = useState<string | null>(null);
+  // Also rendered in the demo, so read the search loosely.
+  const linked = useSearch({ strict: false }).booking;
+  const [open, setOpen] = useState<string | null>(linked ?? null);
   const needle = query.trim().toLowerCase();
   const matches = bookings.filter(
     (item) =>

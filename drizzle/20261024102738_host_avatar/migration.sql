@@ -1,0 +1,1 @@
+ALTER TABLE `scheduling_profile` ADD `avatar_key` text;

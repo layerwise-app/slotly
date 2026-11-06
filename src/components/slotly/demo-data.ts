@@ -60,6 +60,7 @@ export const DEMO_PROFILE: Profile = {
   overrides: [],
   bufferBefore: 0,
   bufferAfter: 10,
+  avatarKey: null,
 };
 
 const GUESTS = [
