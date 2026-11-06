@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { LucideIcon } from "lucide-react";
+import { PoweredByLayerwise } from "~/components/powered-by-layerwise";
 import { cn } from "~/lib/utils";
 import { SlotlyLogo } from "./brand";
 
@@ -10,6 +11,9 @@ export function PublicShell({ children, className }: { children: ReactNode; clas
         <SlotlyLogo />
       </header>
       <main className={cn("mx-auto w-full max-w-5xl flex-1 px-3 pb-12 sm:px-6", className)}>{children}</main>
+      <footer className="mx-auto flex w-full max-w-5xl justify-center px-4 pt-2 pb-8 sm:px-6">
+        <PoweredByLayerwise />
+      </footer>
     </div>
   );
 }
